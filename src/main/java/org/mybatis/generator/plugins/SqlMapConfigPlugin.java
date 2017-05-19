@@ -15,21 +15,21 @@
  */
 package org.mybatis.generator.plugins;
 
-import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.mybatis.generator.api.GeneratedXmlFile;
-import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.XmlConstants;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * This plugin generates an SqlMapConfig file containing sqlMap entries for 

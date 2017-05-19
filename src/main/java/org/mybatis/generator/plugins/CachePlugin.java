@@ -15,14 +15,14 @@
  */
 package org.mybatis.generator.plugins;
 
-import java.util.List;
-
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.internal.util.StringUtility;
+
+import java.util.List;
 
 /**
  * This plugin adds a cache element to generated sqlMaps.  This plugin

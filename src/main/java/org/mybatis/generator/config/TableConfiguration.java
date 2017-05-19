@@ -15,21 +15,19 @@
  */
 package org.mybatis.generator.config;
 
-import static org.mybatis.generator.internal.util.EqualsUtil.areEqual;
-import static org.mybatis.generator.internal.util.HashCodeUtil.hash;
-import static org.mybatis.generator.internal.util.HashCodeUtil.SEED;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-import static org.mybatis.generator.internal.util.StringUtility.composeFullyQualifiedTableName;
-import static org.mybatis.generator.internal.util.StringUtility.isTrue;
-import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
+import org.mybatis.generator.api.dom.xml.Attribute;
+import org.mybatis.generator.api.dom.xml.XmlElement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.generator.api.dom.xml.Attribute;
-import org.mybatis.generator.api.dom.xml.XmlElement;
+import static org.mybatis.generator.internal.util.EqualsUtil.areEqual;
+import static org.mybatis.generator.internal.util.HashCodeUtil.SEED;
+import static org.mybatis.generator.internal.util.HashCodeUtil.hash;
+import static org.mybatis.generator.internal.util.StringUtility.*;
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * The Class TableConfiguration.

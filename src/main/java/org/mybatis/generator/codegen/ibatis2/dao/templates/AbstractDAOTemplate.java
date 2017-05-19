@@ -15,16 +15,16 @@
  */
 package org.mybatis.generator.codegen.ibatis2.dao.templates;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
+
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base class for DAO templates. Subclasses should override any of the

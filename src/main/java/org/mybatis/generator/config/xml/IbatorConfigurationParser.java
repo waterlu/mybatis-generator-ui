@@ -15,19 +15,15 @@
  */
 package org.mybatis.generator.config.xml;
 
-import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
-
-import java.util.Properties;
-
-import org.mybatis.generator.config.Configuration;
-import org.mybatis.generator.config.Context;
-import org.mybatis.generator.config.JavaClientGeneratorConfiguration;
-import org.mybatis.generator.config.ModelType;
-import org.mybatis.generator.config.PluginConfiguration;
+import org.mybatis.generator.config.*;
 import org.mybatis.generator.exception.XMLParserException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.util.Properties;
+
+import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 
 /**
  * This class parses old Ibator configuration files into the new Configuration

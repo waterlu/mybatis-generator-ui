@@ -15,15 +15,15 @@
  */
 package org.mybatis.generator.plugins;
 
-import java.util.List;
-import java.util.Properties;
-
-import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
+
+import java.util.List;
+import java.util.Properties;
 
 /**
  * This plugin adds the java.io.Serializable marker interface to all generated

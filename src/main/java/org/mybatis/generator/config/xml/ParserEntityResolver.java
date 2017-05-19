@@ -15,13 +15,13 @@
  */
 package org.mybatis.generator.config.xml;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.mybatis.generator.codegen.XmlConstants;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author Jeff Butler

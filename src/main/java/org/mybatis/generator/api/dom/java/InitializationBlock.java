@@ -15,12 +15,12 @@
  */
 package org.mybatis.generator.api.dom.java;
 
+import org.mybatis.generator.api.dom.OutputUtilities;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
-
-import org.mybatis.generator.api.dom.OutputUtilities;
 
 public class InitializationBlock {
 

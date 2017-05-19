@@ -15,12 +15,12 @@
  */
 package org.mybatis.generator.api.dom.java;
 
+import org.mybatis.generator.api.dom.OutputUtilities;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
-
-import org.mybatis.generator.api.dom.OutputUtilities;
 
 /**
  * The Class Method.
@@ -41,9 +41,6 @@ public class Method extends JavaElement {
     /** The name. */
     private String name;
 
-    /** The type parameters. */
-    private List<TypeParameter> typeParameters;
-
     /** The parameters. */
     private List<Parameter> parameters;
 
@@ -55,8 +52,6 @@ public class Method extends JavaElement {
     
     /** The is native. */
     private boolean isNative;
-    
-    private boolean isDefault;
 
     /**
      * Instantiates a new method.
@@ -75,7 +70,6 @@ public class Method extends JavaElement {
     public Method(String name) {
         super();
         bodyLines = new ArrayList<String>();
-        typeParameters = new ArrayList<TypeParameter>();
         parameters = new ArrayList<Parameter>();
         exceptions = new ArrayList<FullyQualifiedJavaType>();
         this.name = name;
@@ -90,14 +84,12 @@ public class Method extends JavaElement {
     public Method(Method original) {
         super(original);
         bodyLines = new ArrayList<String>();
-        typeParameters = new ArrayList<TypeParameter>();
         parameters = new ArrayList<Parameter>();
         exceptions = new ArrayList<FullyQualifiedJavaType>();
         this.bodyLines.addAll(original.bodyLines);
         this.constructor = original.constructor;
         this.exceptions.addAll(original.exceptions);
         this.name = original.name;
-        this.typeParameters.addAll(original.typeParameters);
         this.parameters.addAll(original.parameters);
         this.returnType = original.returnType;
         this.isNative = original.isNative;
@@ -175,13 +167,7 @@ public class Method extends JavaElement {
 
         OutputUtilities.javaIndent(sb, indentLevel);
 
-        if (interfaceMethod) {
-            if (isStatic()) {
-                sb.append("static "); //$NON-NLS-1$
-            } else if (isDefault()) {
-                sb.append("default "); //$NON-NLS-1$
-            }
-        } else {
+        if (!interfaceMethod) {
             sb.append(getVisibility().getValue());
 
             if (isStatic()) {
@@ -201,21 +187,6 @@ public class Method extends JavaElement {
             } else if (bodyLines.size() == 0) {
                 sb.append("abstract "); //$NON-NLS-1$
             }
-        }
-
-        if (!getTypeParameters().isEmpty()) {
-            sb.append("<"); //$NON-NLS-1$
-            boolean comma = false;
-            for (TypeParameter typeParameter : getTypeParameters()) {
-                if (comma) {
-                    sb.append(", "); //$NON-NLS-1$
-                } else {
-                    comma = true;
-                }
-
-                sb.append(typeParameter.getFormattedContent(compilationUnit));
-            }
-            sb.append("> "); //$NON-NLS-1$
         }
 
         if (!constructor) {
@@ -343,37 +314,6 @@ public class Method extends JavaElement {
     }
 
     /**
-     * Gets the type parameters.
-     *
-     * @return the type parameters
-     */
-    public List<TypeParameter> getTypeParameters() {
-        return typeParameters;
-    }
-
-    /**
-     * Adds the type parameter.
-     *
-     * @param typeParameter
-     *            the type parameter
-     */
-    public void addTypeParameter(TypeParameter typeParameter) {
-        typeParameters.add(typeParameter);
-    }
-
-    /**
-     * Adds the parameter.
-     *
-     * @param index
-     *            the index
-     * @param typeParameter
-     *            the type parameter
-     */
-    public void addTypeParameter(int index, TypeParameter typeParameter) {
-        typeParameters.add(index, typeParameter);
-    }
-
-    /**
      * Gets the parameters.
      *
      * @return the parameters
@@ -478,13 +418,5 @@ public class Method extends JavaElement {
      */
     public void setNative(boolean isNative) {
         this.isNative = isNative;
-    }
-
-    public boolean isDefault() {
-        return isDefault;
-    }
-
-    public void setDefault(boolean isDefault) {
-        this.isDefault = isDefault;
     }
 }

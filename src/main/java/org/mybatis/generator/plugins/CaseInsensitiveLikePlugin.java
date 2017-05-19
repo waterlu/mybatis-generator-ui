@@ -15,18 +15,13 @@
  */
 package org.mybatis.generator.plugins;
 
-import java.util.List;
-
-import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.InnerClass;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.PluginAdapter;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.codegen.ibatis2.Ibatis2FormattingUtilities;
+
+import java.util.List;
 
 /**
  * This plugin demonstrates adding methods to the example class to enable

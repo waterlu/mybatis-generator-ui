@@ -15,11 +15,11 @@
  */
 package org.mybatis.generator.api;
 
-import java.util.List;
-import java.util.Properties;
-
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.config.Context;
+
+import java.util.List;
+import java.util.Properties;
 
 /**
  * This interface describes methods that are required in any Java type resolver.

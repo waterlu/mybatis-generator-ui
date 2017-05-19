@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2016 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,14 +15,11 @@
  */
 package org.mybatis.generator.api.dom.java;
 
+import java.util.*;
+
 import static org.mybatis.generator.api.dom.OutputUtilities.calculateImports;
 import static org.mybatis.generator.api.dom.OutputUtilities.newLine;
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * The Class TopLevelClass.
@@ -69,7 +66,7 @@ public class TopLevelClass extends InnerClass implements CompilationUnit {
      * @return Returns the importedTypes.
      */
     public Set<FullyQualifiedJavaType> getImportedTypes() {
-        return importedTypes;
+        return Collections.unmodifiableSet(importedTypes);
     }
 
     /**

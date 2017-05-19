@@ -15,15 +15,7 @@
  */
 package org.mybatis.generator.internal;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
-import org.mybatis.generator.api.GeneratedJavaFile;
-import org.mybatis.generator.api.GeneratedXmlFile;
-import org.mybatis.generator.api.Plugin;
-import org.mybatis.generator.api.IntrospectedColumn;
-import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.Method;
@@ -31,6 +23,10 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.Context;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * This class is for internal use only. It contains a list of plugins for the
@@ -880,7 +876,7 @@ public final class PluginAggregator implements Plugin {
     public boolean modelFieldGenerated(Field field,
             TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
             IntrospectedTable introspectedTable,
-            Plugin.ModelClassType modelClassType) {
+            ModelClassType modelClassType) {
         boolean rc = true;
 
         for (Plugin plugin : plugins) {
@@ -897,7 +893,7 @@ public final class PluginAggregator implements Plugin {
     public boolean modelGetterMethodGenerated(Method method,
             TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
             IntrospectedTable introspectedTable,
-            Plugin.ModelClassType modelClassType) {
+            ModelClassType modelClassType) {
         boolean rc = true;
 
         for (Plugin plugin : plugins) {
@@ -914,7 +910,7 @@ public final class PluginAggregator implements Plugin {
     public boolean modelSetterMethodGenerated(Method method,
             TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
             IntrospectedTable introspectedTable,
-            Plugin.ModelClassType modelClassType) {
+            ModelClassType modelClassType) {
         boolean rc = true;
 
         for (Plugin plugin : plugins) {

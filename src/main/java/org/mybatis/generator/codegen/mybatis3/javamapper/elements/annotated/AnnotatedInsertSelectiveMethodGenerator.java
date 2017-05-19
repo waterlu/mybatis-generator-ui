@@ -33,8 +33,9 @@ public class AnnotatedInsertSelectiveMethodGenerator extends
     }
 
     @Override
-    public void addMapperAnnotations(Method method) {
+    public void addMapperAnnotations(Interface interfaze, Method method) {
         FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType(introspectedTable.getMyBatis3SqlProviderType());
+        interfaze.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.InsertProvider")); //$NON-NLS-1$
         StringBuilder sb = new StringBuilder();
         sb.append("@InsertProvider(type="); //$NON-NLS-1$
         sb.append(fqjt.getShortName());
@@ -46,16 +47,7 @@ public class AnnotatedInsertSelectiveMethodGenerator extends
 
         GeneratedKey gk = introspectedTable.getGeneratedKey();
         if (gk != null) {
-            addGeneratedKeyAnnotation(method, gk);
+            addGeneratedKeyAnnotation(interfaze, method, gk);
         }
-    }
-
-    @Override
-    public void addExtraImports(Interface interfaze) {
-        GeneratedKey gk = introspectedTable.getGeneratedKey();
-        if (gk != null) {
-            addGeneratedKeyImports(interfaze, gk);
-        }
-        interfaze.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.InsertProvider")); //$NON-NLS-1$
     }
 }

@@ -15,13 +15,9 @@
  */
 package org.mybatis.generator.api.dom.java;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 import org.mybatis.generator.api.dom.OutputUtilities;
+
+import java.util.*;
 
 /**
  * This class encapsulates the idea of an inner class - it has methods that make
@@ -39,9 +35,6 @@ public class InnerClass extends JavaElement {
 
     /** The inner enums. */
     private List<InnerEnum> innerEnums;
-
-    /** The type parameters. */
-    private List<TypeParameter> typeParameters;
 
     /** The super class. */
     private FullyQualifiedJavaType superClass;
@@ -73,7 +66,6 @@ public class InnerClass extends JavaElement {
         fields = new ArrayList<Field>();
         innerClasses = new ArrayList<InnerClass>();
         innerEnums = new ArrayList<InnerEnum>();
-        this.typeParameters = new ArrayList<TypeParameter>();
         superInterfaceTypes = new HashSet<FullyQualifiedJavaType>();
         methods = new ArrayList<Method>();
         initializationBlocks = new ArrayList<InitializationBlock>();
@@ -176,25 +168,6 @@ public class InnerClass extends JavaElement {
     }
 
     /**
-     * Gets the type parameters.
-     *
-     * @return the type parameters
-     */
-    public List<TypeParameter> getTypeParameters() {
-        return this.typeParameters;
-    }
-
-    /**
-     * Adds the type parameter.
-     *
-     * @param typeParameter
-     *            the type parameter
-     */
-    public void addTypeParameter(TypeParameter typeParameter) {
-        this.typeParameters.add(typeParameter);
-    }
-
-    /**
      * Gets the initialization blocks.
      *
      * @return the initialization blocks
@@ -244,19 +217,6 @@ public class InnerClass extends JavaElement {
 
         sb.append("class "); //$NON-NLS-1$
         sb.append(getType().getShortName());
-
-        if(!this.getTypeParameters().isEmpty()) {
-            boolean comma = false;
-            sb.append("<"); //$NON-NLS-1$
-            for (TypeParameter typeParameter: typeParameters) {
-                if(comma) {
-                    sb.append(", "); //$NON-NLS-1$
-                }
-                sb.append(typeParameter.getFormattedContent(compilationUnit));
-                comma = true;
-            }
-            sb.append("> "); //$NON-NLS-1$
-        }
 
         if (superClass != null) {
             sb.append(" extends "); //$NON-NLS-1$

@@ -15,42 +15,21 @@
  */
 package org.mybatis.generator.codegen.ibatis2.dao;
 
-import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
+import org.mybatis.generator.api.CommentGenerator;
+import org.mybatis.generator.api.FullyQualifiedTable;
+import org.mybatis.generator.api.dom.java.*;
+import org.mybatis.generator.codegen.AbstractJavaClientGenerator;
+import org.mybatis.generator.codegen.AbstractXmlGenerator;
+import org.mybatis.generator.codegen.ibatis2.dao.elements.*;
+import org.mybatis.generator.codegen.ibatis2.dao.templates.AbstractDAOTemplate;
+import org.mybatis.generator.config.PropertyRegistry;
+import org.mybatis.generator.internal.rules.Rules;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mybatis.generator.api.CommentGenerator;
-import org.mybatis.generator.api.FullyQualifiedTable;
-import org.mybatis.generator.api.dom.java.CompilationUnit;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
-import org.mybatis.generator.codegen.AbstractJavaClientGenerator;
-import org.mybatis.generator.codegen.AbstractXmlGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.AbstractDAOElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.CountByExampleMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.DeleteByExampleMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.DeleteByPrimaryKeyMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.InsertMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.InsertSelectiveMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.SelectByExampleWithBLOBsMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.SelectByExampleWithoutBLOBsMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.SelectByPrimaryKeyMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.UpdateByExampleParmsInnerclassGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.UpdateByExampleSelectiveMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.UpdateByExampleWithBLOBsMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.UpdateByExampleWithoutBLOBsMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.UpdateByPrimaryKeySelectiveMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.UpdateByPrimaryKeyWithBLOBsMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.elements.UpdateByPrimaryKeyWithoutBLOBsMethodGenerator;
-import org.mybatis.generator.codegen.ibatis2.dao.templates.AbstractDAOTemplate;
-import org.mybatis.generator.config.PropertyRegistry;
-import org.mybatis.generator.internal.rules.Rules;
+import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * 

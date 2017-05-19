@@ -15,14 +15,14 @@
  */
 package org.mybatis.generator.internal.util;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * This class holds methods useful for constructing custom classloaders.

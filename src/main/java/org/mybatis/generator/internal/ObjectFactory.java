@@ -15,36 +15,22 @@
  */
 package org.mybatis.generator.internal;
 
-import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.mybatis.generator.api.CommentGenerator;
-import org.mybatis.generator.api.ConnectionFactory;
-import org.mybatis.generator.api.FullyQualifiedTable;
-import org.mybatis.generator.api.JavaFormatter;
-import org.mybatis.generator.api.Plugin;
-import org.mybatis.generator.api.IntrospectedColumn;
-import org.mybatis.generator.api.IntrospectedTable;
-import org.mybatis.generator.api.JavaTypeResolver;
-import org.mybatis.generator.api.XmlFormatter;
+import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.DefaultJavaFormatter;
 import org.mybatis.generator.api.dom.DefaultXmlFormatter;
 import org.mybatis.generator.codegen.ibatis2.IntrospectedTableIbatis2Java2Impl;
 import org.mybatis.generator.codegen.ibatis2.IntrospectedTableIbatis2Java5Impl;
 import org.mybatis.generator.codegen.mybatis3.IntrospectedTableMyBatis3Impl;
 import org.mybatis.generator.codegen.mybatis3.IntrospectedTableMyBatis3SimpleImpl;
-import org.mybatis.generator.config.CommentGeneratorConfiguration;
-import org.mybatis.generator.config.ConnectionFactoryConfiguration;
-import org.mybatis.generator.config.Context;
-import org.mybatis.generator.config.PluginConfiguration;
-import org.mybatis.generator.config.JavaTypeResolverConfiguration;
-import org.mybatis.generator.config.PropertyRegistry;
-import org.mybatis.generator.config.TableConfiguration;
+import org.mybatis.generator.config.*;
 import org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * This class creates the different objects needed by the generator.

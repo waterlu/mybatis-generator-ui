@@ -15,23 +15,13 @@
  */
 package org.mybatis.generator.internal;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
+import org.mybatis.generator.exception.ShellException;
+import org.w3c.dom.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.mybatis.generator.exception.ShellException;
-import org.w3c.dom.Attr;
-import org.w3c.dom.CDATASection;
-import org.w3c.dom.Comment;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
-import org.w3c.dom.EntityReference;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.ProcessingInstruction;
-import org.w3c.dom.Text;
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * This class is used to generate a String representation of an XML document. It

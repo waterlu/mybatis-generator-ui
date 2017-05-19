@@ -15,18 +15,12 @@
  */
 package org.mybatis.generator.codegen.ibatis2.dao.elements;
 
-import java.util.Set;
-import java.util.TreeSet;
-
 import org.mybatis.generator.api.DAOMethodNameCalculator;
 import org.mybatis.generator.api.IntrospectedColumn;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
-import org.mybatis.generator.api.dom.java.PrimitiveTypeWrapper;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.*;
+
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * 

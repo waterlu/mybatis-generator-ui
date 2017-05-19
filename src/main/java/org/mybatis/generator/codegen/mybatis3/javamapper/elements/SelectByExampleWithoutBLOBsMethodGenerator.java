@@ -15,16 +15,12 @@
  */
 package org.mybatis.generator.codegen.mybatis3.javamapper.elements;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
+import org.mybatis.generator.api.dom.java.*;
 
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * 
@@ -77,15 +73,11 @@ public class SelectByExampleWithoutBLOBsMethodGenerator extends
         if (context.getPlugins()
                 .clientSelectByExampleWithoutBLOBsMethodGenerated(method,
                         interfaze, introspectedTable)) {
-            addExtraImports(interfaze);
             interfaze.addImportedTypes(importedTypes);
             interfaze.addMethod(method);
         }
     }
 
     public void addMapperAnnotations(Interface interfaze, Method method) {
-    }
-
-    public void addExtraImports(Interface interfaze) {
     }
 }

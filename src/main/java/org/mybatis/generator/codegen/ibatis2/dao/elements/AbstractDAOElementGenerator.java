@@ -15,9 +15,6 @@
  */
 package org.mybatis.generator.codegen.ibatis2.dao.elements;
 
-import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
 import org.mybatis.generator.api.DAOMethodNameCalculator;
 import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
@@ -28,6 +25,9 @@ import org.mybatis.generator.config.PropertyRegistry;
 import org.mybatis.generator.internal.DefaultDAOMethodNameCalculator;
 import org.mybatis.generator.internal.ExtendedDAOMethodNameCalculator;
 import org.mybatis.generator.internal.ObjectFactory;
+
+import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * 

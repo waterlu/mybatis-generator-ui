@@ -15,12 +15,12 @@
  */
 package org.mybatis.generator.api;
 
-import java.sql.Types;
-import java.util.Properties;
-
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.config.Context;
 import org.mybatis.generator.internal.util.StringUtility;
+
+import java.sql.Types;
+import java.util.Properties;
 
 /**
  * This class holds information about an introspected column. The class has

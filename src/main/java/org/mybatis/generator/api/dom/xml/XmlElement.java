@@ -15,11 +15,11 @@
  */
 package org.mybatis.generator.api.dom.xml;
 
+import org.mybatis.generator.api.dom.OutputUtilities;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import org.mybatis.generator.api.dom.OutputUtilities;
 
 /**
  * The Class XmlElement.

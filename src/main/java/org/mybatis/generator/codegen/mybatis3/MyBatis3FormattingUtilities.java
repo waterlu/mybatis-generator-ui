@@ -15,10 +15,10 @@
  */
 package org.mybatis.generator.codegen.mybatis3;
 
+import org.mybatis.generator.api.IntrospectedColumn;
+
 import static org.mybatis.generator.internal.util.StringUtility.escapeStringForJava;
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
-
-import org.mybatis.generator.api.IntrospectedColumn;
 
 /**
  * The Class MyBatis3FormattingUtilities.

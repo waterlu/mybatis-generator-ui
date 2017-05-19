@@ -101,8 +101,4 @@ public class GeneratedXmlFile extends GeneratedFile {
     public boolean isMergeable() {
         return isMergeable;
     }
-    
-    public void setMergeable(boolean isMergeable) {
-        this.isMergeable = isMergeable;
-    }
 }

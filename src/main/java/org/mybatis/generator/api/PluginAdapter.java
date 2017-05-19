@@ -15,9 +15,6 @@
  */
 package org.mybatis.generator.api;
 
-import java.util.List;
-import java.util.Properties;
-
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.Method;
@@ -25,6 +22,9 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.Context;
+
+import java.util.List;
+import java.util.Properties;
 
 /**
  * This class includes no-operation methods for almost every method in the
@@ -230,14 +230,14 @@ public abstract class PluginAdapter implements Plugin {
     public boolean modelFieldGenerated(Field field,
             TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
             IntrospectedTable introspectedTable,
-            Plugin.ModelClassType modelClassType) {
+            ModelClassType modelClassType) {
         return true;
     }
 
     public boolean modelGetterMethodGenerated(Method method,
             TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
             IntrospectedTable introspectedTable,
-            Plugin.ModelClassType modelClassType) {
+            ModelClassType modelClassType) {
         return true;
     }
 
@@ -254,7 +254,7 @@ public abstract class PluginAdapter implements Plugin {
     public boolean modelSetterMethodGenerated(Method method,
             TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
             IntrospectedTable introspectedTable,
-            Plugin.ModelClassType modelClassType) {
+            ModelClassType modelClassType) {
         return true;
     }
 

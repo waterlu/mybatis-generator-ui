@@ -15,10 +15,10 @@
  */
 package org.mybatis.generator.codegen.mybatis3;
 
+import org.mybatis.generator.api.IntrospectedColumn;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.mybatis.generator.api.IntrospectedColumn;
 
 /**
  * Couple of little utility methods to make dealing with generated always

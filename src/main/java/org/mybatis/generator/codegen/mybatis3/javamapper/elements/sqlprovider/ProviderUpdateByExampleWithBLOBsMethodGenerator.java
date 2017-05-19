@@ -15,11 +15,11 @@
  */
 package org.mybatis.generator.codegen.mybatis3.javamapper.elements.sqlprovider;
 
-import java.util.List;
-
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
+
+import java.util.List;
 
 /**
  * 

@@ -15,13 +15,9 @@
  */
 package org.mybatis.generator.api.dom.java;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 import org.mybatis.generator.api.dom.OutputUtilities;
+
+import java.util.*;
 
 /**
  * This class encapsulates the idea of an inner enum - it has methods that make

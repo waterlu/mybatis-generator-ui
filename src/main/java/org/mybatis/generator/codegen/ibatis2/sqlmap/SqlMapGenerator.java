@@ -15,34 +15,15 @@
  */
 package org.mybatis.generator.codegen.ibatis2.sqlmap;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
-
 import org.mybatis.generator.api.FullyQualifiedTable;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.AbstractXmlGenerator;
 import org.mybatis.generator.codegen.XmlConstants;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.AbstractXmlElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.BaseColumnListElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.BlobColumnListElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.CountByExampleElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.DeleteByExampleElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.DeleteByPrimaryKeyElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.ExampleWhereClauseElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.InsertElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.InsertSelectiveElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.ResultMapWithBLOBsElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.ResultMapWithoutBLOBsElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.SelectByExampleWithBLOBsElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.SelectByExampleWithoutBLOBsElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.SelectByPrimaryKeyElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.UpdateByExampleSelectiveElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.UpdateByExampleWithBLOBsElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.UpdateByExampleWithoutBLOBsElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.UpdateByPrimaryKeySelectiveElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.UpdateByPrimaryKeyWithBLOBsElementGenerator;
-import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.UpdateByPrimaryKeyWithoutBLOBsElementGenerator;
+import org.mybatis.generator.codegen.ibatis2.sqlmap.elements.*;
+
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * 

@@ -15,14 +15,10 @@
  */
 package org.mybatis.generator.codegen.mybatis3.javamapper.elements;
 
+import org.mybatis.generator.api.dom.java.*;
+
 import java.util.Set;
 import java.util.TreeSet;
-
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
 
 /**
  * 
@@ -62,19 +58,15 @@ public class InsertMethodGenerator extends AbstractJavaMapperMethodGenerator {
         context.getCommentGenerator().addGeneralMethodComment(method,
                 introspectedTable);
 
-        addMapperAnnotations(method);
+        addMapperAnnotations(interfaze, method);
 
         if (context.getPlugins().clientInsertMethodGenerated(method, interfaze,
                 introspectedTable)) {
-            addExtraImports(interfaze);
             interfaze.addImportedTypes(importedTypes);
             interfaze.addMethod(method);
         }
     }
 
-    public void addMapperAnnotations(Method method) {
-    }
-
-    public void addExtraImports(Interface interfaze) {
+    public void addMapperAnnotations(Interface interfaze, Method method) {
     }
 }

@@ -15,10 +15,10 @@
  */
 package org.mybatis.generator.api.dom;
 
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
+
 import java.util.Set;
 import java.util.TreeSet;
-
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 
 /**
  * The Class OutputUtilities.

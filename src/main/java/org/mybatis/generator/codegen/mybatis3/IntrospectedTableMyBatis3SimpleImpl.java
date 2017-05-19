@@ -15,8 +15,6 @@
  */
 package org.mybatis.generator.codegen.mybatis3;
 
-import java.util.List;
-
 import org.mybatis.generator.api.ProgressCallback;
 import org.mybatis.generator.codegen.AbstractJavaClientGenerator;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
@@ -25,6 +23,8 @@ import org.mybatis.generator.codegen.mybatis3.javamapper.SimpleJavaClientGenerat
 import org.mybatis.generator.codegen.mybatis3.model.SimpleModelGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.SimpleXMLMapperGenerator;
 import org.mybatis.generator.internal.ObjectFactory;
+
+import java.util.List;
 
 /**
  * 

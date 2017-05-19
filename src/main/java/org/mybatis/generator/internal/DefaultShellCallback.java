@@ -15,13 +15,13 @@
  */
 package org.mybatis.generator.internal;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
+import org.mybatis.generator.api.ShellCallback;
+import org.mybatis.generator.exception.ShellException;
 
 import java.io.File;
 import java.util.StringTokenizer;
 
-import org.mybatis.generator.api.ShellCallback;
-import org.mybatis.generator.exception.ShellException;
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * The Class DefaultShellCallback.
@@ -106,7 +106,7 @@ public class DefaultShellCallback implements ShellCallback {
      * @see org.mybatis.generator.api.ShellCallback#mergeJavaFile(java.lang.String, java.lang.String, java.lang.String[], java.lang.String)
      */
     public String mergeJavaFile(String newFileSource,
-            File existingFile, String[] javadocTags, String fileEncoding)
+            String existingFileFullPath, String[] javadocTags, String fileEncoding)
             throws ShellException {
         throw new UnsupportedOperationException();
     }

@@ -15,7 +15,9 @@
  */
 package org.mybatis.generator.codegen;
 
-import static org.mybatis.generator.internal.util.messages.Messages.getString;
+import org.mybatis.generator.api.IntrospectedColumn;
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
+import org.mybatis.generator.internal.ObjectFactory;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
@@ -25,9 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.generator.api.IntrospectedColumn;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.internal.ObjectFactory;
+import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 /**
  * 

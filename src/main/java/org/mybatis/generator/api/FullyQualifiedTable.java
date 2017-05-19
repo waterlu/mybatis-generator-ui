@@ -15,14 +15,14 @@
  */
 package org.mybatis.generator.api;
 
+import org.mybatis.generator.config.Context;
+
 import static org.mybatis.generator.internal.util.EqualsUtil.areEqual;
 import static org.mybatis.generator.internal.util.HashCodeUtil.SEED;
 import static org.mybatis.generator.internal.util.HashCodeUtil.hash;
 import static org.mybatis.generator.internal.util.JavaBeansUtil.getCamelCaseString;
 import static org.mybatis.generator.internal.util.StringUtility.composeFullyQualifiedTableName;
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
-
-import org.mybatis.generator.config.Context;
 
 /**
  * The Class FullyQualifiedTable.

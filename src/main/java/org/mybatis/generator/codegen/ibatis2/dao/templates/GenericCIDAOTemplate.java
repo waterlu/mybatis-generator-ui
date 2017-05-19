@@ -15,11 +15,7 @@
  */
 package org.mybatis.generator.codegen.ibatis2.dao.templates;
 
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
+import org.mybatis.generator.api.dom.java.*;
 
 /**
  * @author Jeff Butler
