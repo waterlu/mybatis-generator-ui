@@ -67,6 +67,16 @@ public class FullyQualifiedTable {
     /** The ending delimiter. */
     private String endingDelimiter;
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    private String remark;
+
     /**
      * This object is used to hold information related to the table itself, not the columns in the table.
      *

@@ -23,6 +23,8 @@ import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.internal.util.StringUtility;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import static org.mybatis.generator.internal.util.StringUtility.isTrue;
@@ -55,6 +57,7 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
             compilationUnit.addImportedType(new FullyQualifiedJavaType("javax.persistence.GeneratedValue"));
             compilationUnit.addImportedType(new FullyQualifiedJavaType("org.hibernate.validator.constraints.NotEmpty"));
         }
+
     }
 
     /**
@@ -83,11 +86,16 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
 
     public void addModelClassComment(TopLevelClass topLevelClass,
                                 IntrospectedTable introspectedTable) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String author = introspectedTable.getContext().getProperty("author");
+        String time = dateFormat.format(new Date());
         topLevelClass.addJavaDocLine("/**");
-        topLevelClass.addJavaDocLine(" * @author ");
+        topLevelClass.addJavaDocLine(" * " + introspectedTable.getFullyQualifiedTable().getRemark());
+        topLevelClass.addJavaDocLine(" * ");
+        topLevelClass.addJavaDocLine(" * Created by " + author + " on " + time + ".");
+        topLevelClass.addJavaDocLine(" * ");
         topLevelClass.addJavaDocLine(" */");
         if(isAnnotations) {
-
             topLevelClass.addAnnotation("@Talbe(name=\"" + introspectedTable.getFullyQualifiedTableNameAtRuntime() + "\")");
         }
     }

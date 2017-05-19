@@ -9,9 +9,12 @@ package com.zzg.mybatis.generator.model;
  */
 public class GeneratorConfig {
 
+
 	/**
 	 * 本配置的名称
 	 */
+	private String author;
+
 	private String name;
 
 	private String connectorJarPath;
@@ -45,6 +48,14 @@ public class GeneratorConfig {
 	private boolean useActualColumnNames;
 
 	private String generateKeys;
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 
 	public String getName() {
 		return name;

@@ -47,6 +47,8 @@ public class MainUIController extends BaseFXController {
     @FXML
     private Label configsLabel;
     @FXML
+    private TextField authorField;
+    @FXML
     private TextField modelTargetPackage;
     @FXML
     private TextField mapperTargetPackage;
@@ -277,6 +279,7 @@ public class MainUIController extends BaseFXController {
 
     public GeneratorConfig getGeneratorConfigFromUI() {
         GeneratorConfig generatorConfig = new GeneratorConfig();
+        generatorConfig.setAuthor(authorField.getText());
         generatorConfig.setProjectFolder(projectFolderField.getText());
         generatorConfig.setModelPackage(modelTargetPackage.getText());
         generatorConfig.setGenerateKeys(generateKeysField.getText());

@@ -151,6 +151,8 @@ public class MybatisGeneratorBridge {
         }
         context.setTargetRuntime("MyBatis3");
 
+        context.addProperty("author", generatorConfig.getAuthor());
+
         List<String> warnings = new ArrayList<>();
         Set<String> fullyqualifiedTables = new HashSet<>();
         Set<String> contexts = new HashSet<>();

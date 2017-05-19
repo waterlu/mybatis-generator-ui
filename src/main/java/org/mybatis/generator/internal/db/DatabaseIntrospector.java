@@ -26,10 +26,7 @@ import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.logging.Log;
 import org.mybatis.generator.logging.LogFactory;
 
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -123,6 +120,21 @@ public class DatabaseIntrospector {
             // ignore the primary key if there's any error
         } finally {
             closeResultSet(rs);
+        }
+
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = databaseMetaData.getConnection().createStatement();
+            resultSet = statement.executeQuery("SHOW TABLE STATUS LIKE '" + table.getIntrospectedTableName() + "'");
+            while (resultSet.next()) {
+                String comment = resultSet.getString("COMMENT");
+                table.setRemark(comment);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResultSet(resultSet);
         }
     }
 
