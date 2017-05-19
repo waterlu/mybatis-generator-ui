@@ -47,6 +47,8 @@ public class GeneratorConfig {
 
 	private boolean useActualColumnNames;
 
+	private boolean apiDoc;
+
 	private String generateKeys;
 
 	public String getAuthor() {
@@ -191,5 +193,13 @@ public class GeneratorConfig {
 
 	public void setGenerateKeys(String generateKeys) {
 		this.generateKeys = generateKeys;
+	}
+
+	public boolean isApiDoc() {
+		return apiDoc;
+	}
+
+	public void setApiDoc(boolean apiDoc) {
+		this.apiDoc = apiDoc;
 	}
 }

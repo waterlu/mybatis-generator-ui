@@ -125,6 +125,7 @@ public class MybatisGeneratorBridge {
         context.setJavaModelGeneratorConfiguration(modelConfig);
         context.setSqlMapGeneratorConfiguration(mapperConfig);
         context.setJavaClientGeneratorConfiguration(daoConfig);
+
         // Comment
         CommentGeneratorConfiguration commentConfig = new CommentGeneratorConfiguration();
         commentConfig.setConfigurationType(DbRemarksCommentGenerator.class.getName());
@@ -133,6 +134,9 @@ public class MybatisGeneratorBridge {
         }
         if (generatorConfig.isAnnotation()) {
             commentConfig.addProperty("annotations", "true");
+        }
+        if (generatorConfig.isApiDoc()) {
+            commentConfig.addProperty("apiDoc", "true");
         }
         context.setCommentGeneratorConfiguration(commentConfig);
         

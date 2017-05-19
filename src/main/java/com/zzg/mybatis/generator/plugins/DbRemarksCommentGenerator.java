@@ -16,6 +16,7 @@
 
 package com.zzg.mybatis.generator.plugins;
 
+import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -23,6 +24,7 @@ import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.internal.util.StringUtility;
 
+import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
@@ -41,6 +43,7 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
     private Properties properties;
     private boolean columnRemarks;
     private boolean isAnnotations;
+    private boolean isApiDoc;
 
     public DbRemarksCommentGenerator() {
         super();
@@ -78,6 +81,8 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
                 .getProperty("columnRemarks"));
         isAnnotations = isTrue(properties
                 .getProperty("annotations"));
+        isApiDoc = isTrue(properties
+                .getProperty("apiDoc"));
     }
 
     public void addClassComment(InnerClass innerClass,
@@ -95,8 +100,11 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
         topLevelClass.addJavaDocLine(" * Created by " + author + " on " + time + ".");
         topLevelClass.addJavaDocLine(" * ");
         topLevelClass.addJavaDocLine(" */");
-        if(isAnnotations) {
-            topLevelClass.addAnnotation("@Talbe(name=\"" + introspectedTable.getFullyQualifiedTableNameAtRuntime() + "\")");
+        if (isAnnotations) {
+//            topLevelClass.addAnnotation("@Table(name=\"" + introspectedTable.getFullyQualifiedTableNameAtRuntime() + "\")");
+        }
+        if (isApiDoc) {
+            topLevelClass.addAnnotation("@ApiModel(description = \"" + introspectedTable.getFullyQualifiedTable().getRemark() + "\")");
         }
     }
 
@@ -117,27 +125,98 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
         }
 
         if (isAnnotations) {
-            boolean isId = false;
-            for (IntrospectedColumn column : introspectedTable.getPrimaryKeyColumns()) {
-                if (introspectedColumn == column) {
-                    isId = true;
-                    field.addAnnotation("@Id");
-                    field.addAnnotation("@GeneratedValue");
-                    break;
+//            boolean isId = false;
+//            for (IntrospectedColumn column : introspectedTable.getPrimaryKeyColumns()) {
+//                if (introspectedColumn == column) {
+//                    isId = true;
+//                    field.addAnnotation("@Id");
+//                    field.addAnnotation("@GeneratedValue");
+//                    break;
+//                }
+//            }
+//            if (!introspectedColumn.isNullable() && !isId){
+//                field.addAnnotation("@NotEmpty");
+//            }
+//            if (introspectedColumn.isIdentity()) {
+//                if (introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement().equals("JDBC")) {
+//                    field.addAnnotation("@GeneratedValue(generator = \"JDBC\")");
+//                } else {
+//                    field.addAnnotation("@GeneratedValue(strategy = GenerationType.IDENTITY)");
+//                }
+//            } else if (introspectedColumn.isSequenceColumn()) {
+//                field.addAnnotation("@SequenceGenerator(name=\"\",sequenceName=\"" + introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement() + "\")");
+//            }
+
+            int jdbcType = introspectedColumn.getJdbcType();
+            if (jdbcType == Types.CHAR) {
+                if (!introspectedColumn.isNullable()) {
+                    field.addAnnotation("@NotBlank");
                 }
-            }
-            if (!introspectedColumn.isNullable() && !isId){
-                field.addAnnotation("@NotEmpty");
-            }
-            if (introspectedColumn.isIdentity()) {
-                if (introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement().equals("JDBC")) {
-                    field.addAnnotation("@GeneratedValue(generator = \"JDBC\")");
-                } else {
-                    field.addAnnotation("@GeneratedValue(strategy = GenerationType.IDENTITY)");
+                int length = introspectedColumn.getLength();
+                String size = String.format("@Size(min = %d, max = %d)", length, length);
+                field.addAnnotation(size);
+            } else if (jdbcType == Types.VARCHAR) {
+                if (!introspectedColumn.isNullable()) {
+                    field.addAnnotation("@NotBlank");
                 }
-            } else if (introspectedColumn.isSequenceColumn()) {
-                field.addAnnotation("@SequenceGenerator(name=\"\",sequenceName=\"" + introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement() + "\")");
+                int length = introspectedColumn.getLength();
+                String size = String.format("@Size(max = %d)", length, length);
+                field.addAnnotation(size);
+            } else if (jdbcType == Types.DECIMAL) {
+                if (!introspectedColumn.isNullable()) {
+                    field.addAnnotation("@NotNull");
+                }
+                int length = introspectedColumn.getLength();
+                int scale = introspectedColumn.getScale();
+            } else if (jdbcType == Types.TINYINT) {
+                if (!introspectedColumn.isNullable()) {
+                    field.addAnnotation("@NotNull");
+                }
+                String min = String.format("@Min(value = %d)", Byte.MIN_VALUE);
+                String max = String.format("@Max(value = %d)", Byte.MAX_VALUE);
+                field.addAnnotation(min);
+                field.addAnnotation(max);
+            } else if (jdbcType == Types.SMALLINT) {
+                if (!introspectedColumn.isNullable()) {
+                    field.addAnnotation("@NotNull");
+                }
+                String min = String.format("@Min(value = %d)", Short.MIN_VALUE);
+                String max = String.format("@Max(value = %d)", Short.MAX_VALUE);
+                field.addAnnotation(min);
+                field.addAnnotation(max);
+            } else if (jdbcType == Types.INTEGER) {
+                if (!introspectedColumn.isNullable()) {
+                    field.addAnnotation("@NotNull");
+                }
+                String min = String.format("@Min(value = %d)", Integer.MIN_VALUE);
+                String max = String.format("@Max(value = %d)", Integer.MAX_VALUE);
+                field.addAnnotation(min);
+                field.addAnnotation(max);
+            } else if (jdbcType == Types.BIGINT) {
+                if (!introspectedColumn.isNullable()) {
+                    field.addAnnotation("@NotNull");
+                }
+                String min = String.format("@Min(value = %d)", Long.MIN_VALUE);
+                String max = String.format("@Max(value = %d)", Long.MAX_VALUE);
+                field.addAnnotation(min);
+                field.addAnnotation(max);
             }
+        }
+
+        //@ApiModelProperty(value = "产品类型", required = true,  allowableValues = "FIXI-定期理财，PRIF-私募基金", example = "FIXI")
+        if (isApiDoc) {
+            StringBuffer buffer = new StringBuffer("@ApiModelProperty(value = \"" + introspectedColumn.getRemarks() + "\"");
+            if (!introspectedColumn.isNullable()) {
+                buffer.append(", required = true");
+            }
+
+            String defaultValue = introspectedColumn.getDefaultValue();
+            if (StringUtils.isNotEmpty(defaultValue)) {
+                buffer.append(", example = \"" + defaultValue + "\"");
+            }
+
+            buffer.append(")");
+            field.addAnnotation(buffer.toString());
         }
     }
 

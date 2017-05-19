@@ -67,6 +67,7 @@
                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
                                       <RowConstraints maxHeight="63.0" minHeight="8.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="92.0" minHeight="62.0" prefHeight="62.0" />
                                   </rowConstraints>
                                   <children>
@@ -181,7 +182,7 @@
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="18.0">
                                        <children>
-                                          <CheckBox fx:id="annotationCheckBox" mnemonicParsing="false" selected="false" text="生成JPA注解" />
+                                          <CheckBox fx:id="annotationCheckBox" mnemonicParsing="false" selected="true" text="生成数据校验" />
                                           <CheckBox fx:id="useActualColumnNamesCheckbox" mnemonicParsing="false" selected="false" text="使用实际的列名" />
                                        </children>
                                     </HBox>
@@ -190,7 +191,7 @@
                                     <Insets left="5.0" />
                                  </padding>
                               </VBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="9">
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="10">
                                  <children>
                                             <Button mnemonicParsing="false" onAction="#generateCode" text="代码生成">
                                        <styleClass>
@@ -215,6 +216,7 @@
                                  </GridPane.margin></TextField>
                               <Label text="作者" />
                               <TextField fx:id="authorField" prefHeight="23.0" prefWidth="159.0" promptText="Author" GridPane.columnIndex="1" />
+                              <CheckBox fx:id="docCheckBox" mnemonicParsing="false" selected="true" text="生成API文档注解" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                                   </children>
                               </GridPane>
                      </children>
