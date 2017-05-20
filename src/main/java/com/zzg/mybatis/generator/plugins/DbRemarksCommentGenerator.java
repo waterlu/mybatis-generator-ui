@@ -45,6 +45,14 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
     private boolean isAnnotations;
     private boolean isApiDoc;
 
+    private final static String DELETE_FLAG = "delete_flag";
+
+    private final static String CREATE_TIME = "create_time";
+
+    private final static String UPDATE_TIME = "update_time";
+
+    private final static String STATUS = "status";
+
     public DbRemarksCommentGenerator() {
         super();
         properties = new Properties();
@@ -147,30 +155,31 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
 //                field.addAnnotation("@SequenceGenerator(name=\"\",sequenceName=\"" + introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement() + "\")");
 //            }
 
+            String columnName = introspectedColumn.getActualColumnName();
             int jdbcType = introspectedColumn.getJdbcType();
             if (jdbcType == Types.CHAR) {
                 if (!introspectedColumn.isNullable()) {
-                    field.addAnnotation("@NotBlank");
+                    field.addAnnotation("@NotBlank(message = \"" + columnName + "不能为空\")");
                 }
                 int length = introspectedColumn.getLength();
                 String size = String.format("@Size(min = %d, max = %d)", length, length);
                 field.addAnnotation(size);
             } else if (jdbcType == Types.VARCHAR) {
                 if (!introspectedColumn.isNullable()) {
-                    field.addAnnotation("@NotBlank");
+                    field.addAnnotation("@NotBlank(message = \"" + columnName + "不能为空\")");
                 }
                 int length = introspectedColumn.getLength();
                 String size = String.format("@Size(max = %d)", length, length);
                 field.addAnnotation(size);
             } else if (jdbcType == Types.DECIMAL) {
                 if (!introspectedColumn.isNullable()) {
-                    field.addAnnotation("@NotNull");
+                    field.addAnnotation("@NotNull(message = \"" + columnName + "不能为空\")");
                 }
                 int length = introspectedColumn.getLength();
                 int scale = introspectedColumn.getScale();
             } else if (jdbcType == Types.TINYINT) {
                 if (!introspectedColumn.isNullable()) {
-                    field.addAnnotation("@NotNull");
+                    field.addAnnotation("@NotNull(message = \"" + columnName + "不能为空\")");
                 }
                 String min = String.format("@Min(value = %d)", Byte.MIN_VALUE);
                 String max = String.format("@Max(value = %d)", Byte.MAX_VALUE);
@@ -178,7 +187,7 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
                 field.addAnnotation(max);
             } else if (jdbcType == Types.SMALLINT) {
                 if (!introspectedColumn.isNullable()) {
-                    field.addAnnotation("@NotNull");
+                    field.addAnnotation("@NotNull(message = \"" + columnName + "不能为空\")");
                 }
                 String min = String.format("@Min(value = %d)", Short.MIN_VALUE);
                 String max = String.format("@Max(value = %d)", Short.MAX_VALUE);
@@ -186,37 +195,58 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
                 field.addAnnotation(max);
             } else if (jdbcType == Types.INTEGER) {
                 if (!introspectedColumn.isNullable()) {
-                    field.addAnnotation("@NotNull");
+                    field.addAnnotation("@NotNull(message = \"" + columnName + "不能为空\")");
                 }
-                String min = String.format("@Min(value = %d)", Integer.MIN_VALUE);
-                String max = String.format("@Max(value = %d)", Integer.MAX_VALUE);
-                field.addAnnotation(min);
-                field.addAnnotation(max);
             } else if (jdbcType == Types.BIGINT) {
                 if (!introspectedColumn.isNullable()) {
-                    field.addAnnotation("@NotNull");
+                    field.addAnnotation("@NotNull(message = \"" + columnName + "不能为空\")");
                 }
-                String min = String.format("@Min(value = %d)", Long.MIN_VALUE);
-                String max = String.format("@Max(value = %d)", Long.MAX_VALUE);
-                field.addAnnotation(min);
-                field.addAnnotation(max);
             }
         }
 
         //@ApiModelProperty(value = "产品类型", required = true,  allowableValues = "FIXI-定期理财，PRIF-私募基金", example = "FIXI")
         if (isApiDoc) {
-            StringBuffer buffer = new StringBuffer("@ApiModelProperty(value = \"" + introspectedColumn.getRemarks() + "\"");
-            if (!introspectedColumn.isNullable()) {
-                buffer.append(", required = true");
-            }
+            String columnName = introspectedColumn.getActualColumnName();
+            if (columnName.equalsIgnoreCase(DELETE_FLAG)) {
+                if (introspectedColumn.isNullable()) {
+                    field.addAnnotation("@ApiModelProperty(value = \"删除标记\", allowableValues = \"0-未删除，1-已删除\", example = \"0\")");
+                } else {
+                    field.addAnnotation("@ApiModelProperty(value = \"删除标记\", required = true, allowableValues = \"0-未删除，1-已删除\", example = \"0\")");
+                }
+            } else if (columnName.equalsIgnoreCase(CREATE_TIME)) {
+                if (introspectedColumn.isNullable()) {
+                    field.addAnnotation("@ApiModelProperty(value = \"记录创建时间\")");
+                } else {
+                    field.addAnnotation("@ApiModelProperty(value = \"记录创建时间\", required = true)");
+                }
+            } else if (columnName.equalsIgnoreCase(UPDATE_TIME)) {
+                if (introspectedColumn.isNullable()) {
+                    field.addAnnotation("@ApiModelProperty(value = \"最后更新时间\")");
+                } else {
+                    field.addAnnotation("@ApiModelProperty(value = \"最后更新时间\", required = true)");
+                }
+            } else {
+                if (columnName.contains(STATUS)) {
+                    if (introspectedColumn.isNullable()) {
+                        field.addAnnotation("@ApiModelProperty(value = \"" + introspectedColumn.getRemarks() + "\", required = true, allowableValues = \"1-状态1 2-状态2 3-状态3\")");
+                    } else {
+                        field.addAnnotation("@ApiModelProperty(value = \"" + introspectedColumn.getRemarks() + "\", allowableValues = \"1-状态1 2-状态2 3-状态3\")");
+                    }
+                } else {
+                    StringBuffer buffer = new StringBuffer("@ApiModelProperty(value = \"" + introspectedColumn.getRemarks() + "\"");
+                    if (!introspectedColumn.isNullable()) {
+                        buffer.append(", required = true");
+                    }
 
-            String defaultValue = introspectedColumn.getDefaultValue();
-            if (StringUtils.isNotEmpty(defaultValue)) {
-                buffer.append(", example = \"" + defaultValue + "\"");
-            }
+                    String defaultValue = introspectedColumn.getDefaultValue();
+                    if (StringUtils.isNotEmpty(defaultValue)) {
+                        buffer.append(", example = \"" + defaultValue + "\"");
+                    }
 
-            buffer.append(")");
-            field.addAnnotation(buffer.toString());
+                    buffer.append(")");
+                    field.addAnnotation(buffer.toString());
+                }
+            }
         }
     }
 
