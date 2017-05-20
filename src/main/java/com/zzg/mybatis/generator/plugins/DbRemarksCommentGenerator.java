@@ -155,7 +155,7 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
 //                field.addAnnotation("@SequenceGenerator(name=\"\",sequenceName=\"" + introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement() + "\")");
 //            }
 
-            String columnName = introspectedColumn.getActualColumnName();
+            String columnName = field.getName();
             int jdbcType = introspectedColumn.getJdbcType();
             if (jdbcType == Types.CHAR) {
                 if (!introspectedColumn.isNullable()) {

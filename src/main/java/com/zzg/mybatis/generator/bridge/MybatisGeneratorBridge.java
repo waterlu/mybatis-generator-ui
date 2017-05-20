@@ -118,6 +118,9 @@ public class MybatisGeneratorBridge {
         daoConfig.setTargetPackage(generatorConfig.getDaoPackage());
         daoConfig.setTargetProject(generatorConfig.getProjectFolder() + "/" + generatorConfig.getDaoTargetFolder());
 
+        JavaTypeResolverConfiguration javaTypeConfiguration = new JavaTypeResolverConfiguration();
+        javaTypeConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.MyJavaTypeResolverImpl");
+
         context.setId("myid");
         context.addTableConfiguration(tableConfig);
         context.setJdbcConnectionConfiguration(jdbcConfig);
@@ -125,6 +128,8 @@ public class MybatisGeneratorBridge {
         context.setJavaModelGeneratorConfiguration(modelConfig);
         context.setSqlMapGeneratorConfiguration(mapperConfig);
         context.setJavaClientGeneratorConfiguration(daoConfig);
+        context.setJavaTypeResolverConfiguration(javaTypeConfiguration);
+
 
         // Comment
         CommentGeneratorConfiguration commentConfig = new CommentGeneratorConfiguration();
