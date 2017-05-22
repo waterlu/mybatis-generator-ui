@@ -25,6 +25,10 @@ public class GeneratorConfig {
 
 	private String modelPackageTargetFolder;
 
+	private String voModelPackage;
+
+	private String voModelPackageTargetFolder;
+
 	private String daoPackage;
 
 	private String daoTargetFolder;
@@ -201,5 +205,21 @@ public class GeneratorConfig {
 
 	public void setApiDoc(boolean apiDoc) {
 		this.apiDoc = apiDoc;
+	}
+
+	public String getVoModelPackage() {
+		return voModelPackage;
+	}
+
+	public void setVoModelPackage(String voModelPackage) {
+		this.voModelPackage = voModelPackage;
+	}
+
+	public String getVoModelPackageTargetFolder() {
+		return voModelPackageTargetFolder;
+	}
+
+	public void setVoModelPackageTargetFolder(String voModelPackageTargetFolder) {
+		this.voModelPackageTargetFolder = voModelPackageTargetFolder;
 	}
 }

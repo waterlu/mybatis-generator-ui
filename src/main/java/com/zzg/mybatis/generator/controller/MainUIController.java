@@ -47,6 +47,10 @@ public class MainUIController extends BaseFXController {
     private static final String FOLDER_NO_EXIST = "部分目录不存在，是否创建";
     // tool bar buttons
     @FXML
+    private TextField voTargetPackage;
+    @FXML
+    private TextField voTargetProject;
+    @FXML
     private javafx.scene.control.CheckBox docCheckBox;
     @FXML
     private Label connectionLabel;
@@ -302,6 +306,8 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setAnnotation(annotationCheckBox.isSelected());
         generatorConfig.setApiDoc(docCheckBox.isSelected());
         generatorConfig.setUseActualColumnNames(useActualColumnNamesCheckbox.isSelected());
+        generatorConfig.setVoModelPackage(voTargetPackage.getText());
+        generatorConfig.setVoModelPackageTargetFolder(voTargetProject.getText());
         return generatorConfig;
     }
 

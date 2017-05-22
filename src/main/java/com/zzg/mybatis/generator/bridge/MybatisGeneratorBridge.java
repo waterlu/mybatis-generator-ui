@@ -4,6 +4,8 @@ import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.model.DbType;
 import com.zzg.mybatis.generator.model.GeneratorConfig;
 import com.zzg.mybatis.generator.plugins.DbRemarksCommentGenerator;
+import com.zzg.mybatis.generator.plugins.JavaVOModelGeneratorConfiguration;
+import com.zzg.mybatis.generator.plugins.VoRemarksCommenctGenerator;
 import com.zzg.mybatis.generator.util.ConfigHelper;
 import com.zzg.mybatis.generator.util.DbUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -117,6 +119,11 @@ public class MybatisGeneratorBridge {
         daoConfig.setConfigurationType("XMLMAPPER");
         daoConfig.setTargetPackage(generatorConfig.getDaoPackage());
         daoConfig.setTargetProject(generatorConfig.getProjectFolder() + "/" + generatorConfig.getDaoTargetFolder());
+        // Java VO Model
+        JavaVOModelGeneratorConfiguration javaVOModelConfig = new  JavaVOModelGeneratorConfiguration();
+        javaVOModelConfig.setConfigurationType("JAVA_VO_MODEL");
+        javaVOModelConfig.setTargetPackage(generatorConfig.getVoModelPackage());
+        javaVOModelConfig.setTargetProject(generatorConfig.getProjectFolder() + "/" + generatorConfig.getVoModelPackageTargetFolder());
 
         JavaTypeResolverConfiguration javaTypeConfiguration = new JavaTypeResolverConfiguration();
         javaTypeConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.MyJavaTypeResolverImpl");
@@ -129,7 +136,8 @@ public class MybatisGeneratorBridge {
         context.setSqlMapGeneratorConfiguration(mapperConfig);
         context.setJavaClientGeneratorConfiguration(daoConfig);
         context.setJavaTypeResolverConfiguration(javaTypeConfiguration);
-
+        // 增加VO Model对象
+        context.setJavaVOModelGeneratorConfiguration(javaVOModelConfig);
 
         // Comment
         CommentGeneratorConfiguration commentConfig = new CommentGeneratorConfiguration();
@@ -144,6 +152,21 @@ public class MybatisGeneratorBridge {
             commentConfig.addProperty("apiDoc", "true");
         }
         context.setCommentGeneratorConfiguration(commentConfig);
+
+        // Java VO Model Comment
+        CommentGeneratorConfiguration voCommentConfig = new CommentGeneratorConfiguration();
+        commentConfig.setConfigurationType(VoRemarksCommenctGenerator.class.getName());
+        if (generatorConfig.isComment()) {
+            commentConfig.addProperty("columnRemarks", "true");
+        }
+        if (generatorConfig.isAnnotation()) {
+            commentConfig.addProperty("annotations", "true");
+        }
+        if (generatorConfig.isApiDoc()) {
+            commentConfig.addProperty("apiDoc", "true");
+        }
+        context.setCommentGeneratorConfiguration(commentConfig);
+
         
         //实体添加序列化
         PluginConfiguration serializablePluginConfiguration = new PluginConfiguration();

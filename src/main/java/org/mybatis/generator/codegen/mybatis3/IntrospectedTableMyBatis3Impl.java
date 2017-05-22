@@ -15,6 +15,7 @@
  */
 package org.mybatis.generator.codegen.mybatis3;
 
+import com.zzg.mybatis.generator.plugins.JavaVOModelGenerator;
 import org.mybatis.generator.api.GeneratedJavaFile;
 import org.mybatis.generator.api.GeneratedXmlFile;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -196,6 +197,11 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
                     progressCallback);
             javaModelGenerators.add(javaGenerator);
         }
+
+        // 增加VO对象的生成逻辑
+        AbstractJavaGenerator javaVOGenerator = new JavaVOModelGenerator();
+        initializeAbstractGenerator(javaVOGenerator, warnings, progressCallback);
+        javaModelGenerators.add(javaVOGenerator);
     }
 
     /**

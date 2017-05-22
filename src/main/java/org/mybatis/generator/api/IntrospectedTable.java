@@ -15,6 +15,7 @@
  */
 package org.mybatis.generator.api;
 
+import com.zzg.mybatis.generator.plugins.JavaVOModelGeneratorConfiguration;
 import org.mybatis.generator.config.*;
 import org.mybatis.generator.internal.rules.ConditionalModelRules;
 import org.mybatis.generator.internal.rules.FlatModelRules;
@@ -161,7 +162,12 @@ public abstract class IntrospectedTable {
         ATTR_MYBATIS3_UPDATE_BY_EXAMPLE_WHERE_CLAUSE_ID,
         
         /** The ATT r_ mybati s3_ sq l_ provide r_ type. */
-        ATTR_MYBATIS3_SQL_PROVIDER_TYPE
+        ATTR_MYBATIS3_SQL_PROVIDER_TYPE,
+
+        /**
+         * 新增VO Modal对象
+         */
+        ATTR_VO_MODEL_TYPE
     }
 
     /** The table configuration. */
@@ -520,6 +526,15 @@ public abstract class IntrospectedTable {
     }
 
     /**
+     * 获取VO Modal的类型
+     *
+     * @return
+     */
+    public String getVoModalType() {
+        return internalAttributes.get(InternalAttribute.ATTR_VO_MODEL_TYPE);
+    }
+
+    /**
      * Gets the example type.
      *
      * @return the type for the example class.
@@ -746,6 +761,8 @@ public abstract class IntrospectedTable {
         calculateJavaClientAttributes();
         calculateModelAttributes();
         calculateXmlAttributes();
+        // 增加VO Model对象
+        calculateVOModelAttributes();
 
         if (tableConfiguration.getModelType() == ModelType.HIERARCHICAL) {
             rules = new HierarchicalModelRules(this);
@@ -787,7 +804,7 @@ public abstract class IntrospectedTable {
         setUpdateByExampleWithBLOBsStatementId("updateByExampleWithBLOBs"); //$NON-NLS-1$
         setUpdateByPrimaryKeyStatementId("updateByPrimaryKey"); //$NON-NLS-1$
         setUpdateByPrimaryKeySelectiveStatementId("updateByPrimaryKeySelective"); //$NON-NLS-1$
-        setUpdateByPrimaryKeyWithBLOBsStatementId("updateByPrimaryKeyWithBLOBs"); //$NON-NLS-1$
+//        setUpdateByPrimaryKeyWithBLOBsStatementId("updateByPrimaryKeyWithBLOBs"); //$NON-NLS-1$
         setBaseResultMapId("BaseResultMap"); //$NON-NLS-1$
         setResultMapWithBLOBsId("ResultMapWithBLOBs"); //$NON-NLS-1$
         setExampleWhereClauseId("Example_Where_Clause"); //$NON-NLS-1$
@@ -1396,6 +1413,34 @@ public abstract class IntrospectedTable {
     }
 
     /**
+     * 读取VO Model的包名
+     * @return
+     */
+    protected String calculateJavaVOModelPackage() {
+        JavaVOModelGeneratorConfiguration config = context.getJavaVOModelGeneratorConfiguration();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(config.getTargetPackage());
+        sb.append(fullyQualifiedTable.getSubPackageForModel(isSubPackagesEnabled(config)));
+
+        return sb.toString();
+    }
+
+    /**
+     * VO Model 的属性
+     */
+    protected void calculateVOModelAttributes() {
+        String packageName = calculateJavaVOModelPackage();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(packageName);
+        sb.append('.');
+        sb.append(fullyQualifiedTable.getDomainObjectName());
+        sb.append("Vo"); //$NON-NLS-1$
+        this.setVoModalType(sb.toString());
+    }
+
+    /**
      * Calculate sql map package.
      *
      * @return the string
@@ -1630,6 +1675,16 @@ public abstract class IntrospectedTable {
     public void setBaseRecordType(String baseRecordType) {
         internalAttributes.put(InternalAttribute.ATTR_BASE_RECORD_TYPE,
                 baseRecordType);
+    }
+
+    /**
+     * 设置VO Model的类型
+     *
+     * @param voModalType
+     */
+    public void setVoModalType(String voModalType) {
+        internalAttributes.put(InternalAttribute.ATTR_VO_MODEL_TYPE,
+                voModalType);
     }
 
     /**

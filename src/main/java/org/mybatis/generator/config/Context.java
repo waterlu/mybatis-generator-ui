@@ -15,6 +15,7 @@
  */
 package org.mybatis.generator.config;
 
+import com.zzg.mybatis.generator.plugins.JavaVOModelGeneratorConfiguration;
 import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.XmlElement;
@@ -73,6 +74,21 @@ public class Context extends PropertyHolder {
 
     /** The comment generator configuration. */
     private CommentGeneratorConfiguration commentGeneratorConfiguration;
+
+    /**
+     * JAVA VO 对象的配置信息
+     */
+    private JavaVOModelGeneratorConfiguration javaVOModelGeneratorConfiguration;
+
+    /**
+     * Java VO 对象的注释配置
+     */
+    private CommentGeneratorConfiguration voCommentGeneratorConfiguration;
+
+    /**
+     * Java VO 对象的注释Generator
+     */
+    private CommentGenerator voCommentGenerator;
 
     /** The comment generator. */
     private CommentGenerator commentGenerator;
@@ -172,6 +188,14 @@ public class Context extends PropertyHolder {
         return sqlMapGeneratorConfiguration;
     }
 
+
+    public JavaVOModelGeneratorConfiguration getJavaVOModelGeneratorConfiguration() {
+        return javaVOModelGeneratorConfiguration;
+    }
+
+    public void setJavaVOModelGeneratorConfiguration(JavaVOModelGeneratorConfiguration javaVOModelGeneratorConfiguration) {
+        this.javaVOModelGeneratorConfiguration = javaVOModelGeneratorConfiguration;
+    }
     /**
      * Adds the plugin configuration.
      *
@@ -454,6 +478,19 @@ public class Context extends PropertyHolder {
         }
 
         return commentGenerator;
+    }
+
+    /**
+     * 返回VO对象的注释Generator
+     *
+     * @return
+     */
+    public CommentGenerator getVOCommentGenerator() {
+        if (voCommentGenerator == null) {
+            voCommentGenerator = ObjectFactory.createCommentGenerator(this);
+        }
+
+        return voCommentGenerator;
     }
 
     /**
@@ -774,5 +811,14 @@ public class Context extends PropertyHolder {
 
     public void setConnectionFactoryConfiguration(ConnectionFactoryConfiguration connectionFactoryConfiguration) {
         this.connectionFactoryConfiguration = connectionFactoryConfiguration;
+    }
+
+
+    public CommentGeneratorConfiguration getVoCommentGeneratorConfiguration() {
+        return voCommentGeneratorConfiguration;
+    }
+
+    public void setVoCommentGeneratorConfiguration(CommentGeneratorConfiguration voCommentGeneratorConfiguration) {
+        this.voCommentGeneratorConfiguration = voCommentGeneratorConfiguration;
     }
 }
