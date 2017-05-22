@@ -15,6 +15,7 @@
  */
 package org.mybatis.generator.config;
 
+import com.zzg.mybatis.generator.plugins.JavaControllerGeneratorConfiguration;
 import com.zzg.mybatis.generator.plugins.JavaVOModelGeneratorConfiguration;
 import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.xml.Attribute;
@@ -79,6 +80,11 @@ public class Context extends PropertyHolder {
      * JAVA VO 对象的配置信息
      */
     private JavaVOModelGeneratorConfiguration javaVOModelGeneratorConfiguration;
+
+    /**
+     * JAVA Controller对象配置信息
+     */
+    private JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration;
 
     /**
      * Java VO 对象的注释配置
@@ -196,6 +202,15 @@ public class Context extends PropertyHolder {
     public void setJavaVOModelGeneratorConfiguration(JavaVOModelGeneratorConfiguration javaVOModelGeneratorConfiguration) {
         this.javaVOModelGeneratorConfiguration = javaVOModelGeneratorConfiguration;
     }
+
+    public JavaControllerGeneratorConfiguration getJavaControllerGeneratorConfiguration() {
+        return javaControllerGeneratorConfiguration;
+    }
+
+    public void setJavaControllerGeneratorConfiguration(JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration) {
+        this.javaControllerGeneratorConfiguration = javaControllerGeneratorConfiguration;
+    }
+
     /**
      * Adds the plugin configuration.
      *

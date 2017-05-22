@@ -15,6 +15,7 @@
  */
 package org.mybatis.generator.api;
 
+import com.zzg.mybatis.generator.plugins.JavaControllerGeneratorConfiguration;
 import com.zzg.mybatis.generator.plugins.JavaVOModelGeneratorConfiguration;
 import org.mybatis.generator.config.*;
 import org.mybatis.generator.internal.rules.ConditionalModelRules;
@@ -167,7 +168,32 @@ public abstract class IntrospectedTable {
         /**
          * 新增VO Modal对象
          */
-        ATTR_VO_MODEL_TYPE
+        ATTR_VO_MODEL_TYPE,
+
+        /**
+         * 新增Result VO对象
+         */
+        ATTR_RESULT_VO_TYPE,
+
+        /**
+         * 新增Result List VO对象
+         */
+        ATTR_RESULT_LIST_VO_TYPE,
+
+        /**
+         * 新增Controller对象
+         */
+        ATTR_CONTROLLER_TYPE,
+
+        /**
+         * 新增Service对象
+         */
+        ATTR_SERVICE_TYPE,
+
+        /**
+         * 新增ServiceImpl对象
+         */
+        ATTR_SERVICE_IMPL_TYPE
     }
 
     /** The table configuration. */
@@ -535,6 +561,51 @@ public abstract class IntrospectedTable {
     }
 
     /**
+     * 获取Result VO的类型
+     *
+     * @return
+     */
+    public String getResultVoType() {
+        return internalAttributes.get(InternalAttribute.ATTR_RESULT_VO_TYPE);
+    }
+
+    /**
+     * 获取Result List VO的类型
+     *
+     * @return
+     */
+    public String getResultListVoType() {
+        return internalAttributes.get(InternalAttribute.ATTR_RESULT_VO_TYPE);
+    }
+
+    /**
+     * 获取 Controller的类型
+     *
+     * @return
+     */
+    public String getControllerType() {
+        return internalAttributes.get(InternalAttribute.ATTR_CONTROLLER_TYPE);
+    }
+
+    /**
+     * 获取Service的类型
+     *
+     * @return
+     */
+    public String getServiceType() {
+        return internalAttributes.get(InternalAttribute.ATTR_SERVICE_TYPE);
+    }
+
+    /**
+     * 获取ServiceImpl的类型
+     *
+     * @return
+     */
+    public String getServiceImplType() {
+        return internalAttributes.get(InternalAttribute.ATTR_SERVICE_IMPL_TYPE);
+    }
+
+    /**
      * Gets the example type.
      *
      * @return the type for the example class.
@@ -763,6 +834,16 @@ public abstract class IntrospectedTable {
         calculateXmlAttributes();
         // 增加VO Model对象
         calculateVOModelAttributes();
+        // 增加Result VO对象
+
+        // 增加Result List VO对象
+
+        // 增加Controller对象
+        calculateControllerAttributes();
+
+        // 增加Service对象
+
+        // 增加ServiceImpl对象
 
         if (tableConfiguration.getModelType() == ModelType.HIERARCHICAL) {
             rules = new HierarchicalModelRules(this);
@@ -1426,6 +1507,77 @@ public abstract class IntrospectedTable {
         return sb.toString();
     }
 
+//    /**
+//     * Result VO 包名
+//     *
+//     * @return
+//     */
+//    protected String calculateJavaResultVOPackage() {
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(config.getTargetPackage());
+//        sb.append(fullyQualifiedTable.getSubPackageForModel(isSubPackagesEnabled(config)));
+//
+//        return sb.toString();
+//    }
+//
+//    /**
+//     * Result List VO 包名
+//     *
+//     * @return
+//     */
+//    protected String calculateJavaResultListVOPackage() {
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(config.getTargetPackage());
+//        sb.append(fullyQualifiedTable.getSubPackageForModel(isSubPackagesEnabled(config)));
+//
+//        return sb.toString();
+//    }
+
+    /**
+     * Controller包名
+     *
+     * @return
+     */
+    protected String calculateJavaControllerPackage() {
+        JavaControllerGeneratorConfiguration config = context.getJavaControllerGeneratorConfiguration();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(config.getTargetPackage());
+        sb.append(fullyQualifiedTable.getSubPackageForModel(isSubPackagesEnabled(config)));
+
+        return sb.toString();
+    }
+
+//    /**
+//     * Service包名
+//     *
+//     * @return
+//     */
+//    protected String calculateJavaServicePackage() {
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(config.getTargetPackage());
+//        sb.append(fullyQualifiedTable.getSubPackageForModel(isSubPackagesEnabled(config)));
+//
+//        return sb.toString();
+//    }
+//
+//    /**
+//     * ServiceImpl包名
+//     *
+//     * @return
+//     */
+//    protected String calculateJavaServiceImplPackage() {
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(config.getTargetPackage());
+//        sb.append(fullyQualifiedTable.getSubPackageForModel(isSubPackagesEnabled(config)));
+//
+//        return sb.toString();
+//    }
+
     /**
      * VO Model 的属性
      */
@@ -1436,9 +1588,79 @@ public abstract class IntrospectedTable {
         sb.append(packageName);
         sb.append('.');
         sb.append(fullyQualifiedTable.getDomainObjectName());
-        sb.append("Vo"); //$NON-NLS-1$
+        sb.append("ParamVO"); //$NON-NLS-1$
         this.setVoModalType(sb.toString());
     }
+
+//    /**
+//     * Result VO对象
+//     */
+//    protected void calculateResultVoAttributes() {
+//        String packageName = calculateJavaResultVOPackage();
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(packageName);
+//        sb.append('.');
+//        sb.append(fullyQualifiedTable.getDomainObjectName());
+//        sb.append("ResultVO"); //$NON-NLS-1$
+//        this.setVoModalType(sb.toString());
+//    }
+//
+//    /**
+//     * Result List VO对象
+//     */
+//    protected void calculateResultListVoAttributes() {
+//        String packageName = calculateJavaResultListVOPackage();
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(packageName);
+//        sb.append('.');
+//        sb.append(fullyQualifiedTable.getDomainObjectName());
+//        sb.append("ResultListVO"); //$NON-NLS-1$
+//        this.setVoModalType(sb.toString());
+//    }
+
+    /**
+     * Controller对象
+     */
+    protected void calculateControllerAttributes() {
+        String packageName = calculateJavaControllerPackage();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(packageName);
+        sb.append('.');
+        sb.append(fullyQualifiedTable.getDomainObjectName());
+        sb.append("Controller"); //$NON-NLS-1$
+        this.setVoModalType(sb.toString());
+    }
+
+//    /**
+//     * Service对象
+//     */
+//    protected void calculateServiceAttributes() {
+//        String packageName = calculateJavaServicePackage();
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(packageName);
+//        sb.append(".");
+//        sb.append(fullyQualifiedTable.getDomainObjectName());
+//        sb.append("Service"); //$NON-NLS-1$
+//        this.setVoModalType(sb.toString());
+//    }
+//
+//    /**
+//     * ServiceImpl对象
+//     */
+//    protected void calculateServiceAttributes() {
+//        String packageName = calculateJavaServiceImplPackage();
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(packageName);
+//        sb.append(".");
+//        sb.append(fullyQualifiedTable.getDomainObjectName());
+//        sb.append("ServiceImpl"); //$NON-NLS-1$
+//        this.setVoModalType(sb.toString());
+//    }
 
     /**
      * Calculate sql map package.
@@ -1685,6 +1907,52 @@ public abstract class IntrospectedTable {
     public void setVoModalType(String voModalType) {
         internalAttributes.put(InternalAttribute.ATTR_VO_MODEL_TYPE,
                 voModalType);
+    }
+
+    /**
+     * 设置Result VO的类型
+     *
+     * @param resultVoType
+     */
+    public void setResultVoType(String resultVoType) {
+        internalAttributes.put(InternalAttribute.ATTR_RESULT_VO_TYPE, resultVoType);
+    }
+
+    /**
+     * 设置Result List VO的类型
+     *
+     * @param resultListVoType
+     */
+    public void setResultListVoType(String resultListVoType) {
+        internalAttributes.put(InternalAttribute.ATTR_RESULT_LIST_VO_TYPE, resultListVoType);
+    }
+
+    /**
+     * 设置Controller的类型
+     *
+     * @param controllerType
+     */
+    public void setControllerType(String controllerType) {
+        internalAttributes.put(InternalAttribute.ATTR_CONTROLLER_TYPE,
+                controllerType);
+    }
+
+    /**
+     * 设置Service的类型
+     *
+     * @param serviceType
+     */
+    public void setServiceType(String serviceType) {
+        internalAttributes.put(InternalAttribute.ATTR_SERVICE_TYPE, serviceType);
+    }
+
+    /**
+     * 设置ServiceImpl的类型
+     *
+     * @param serviceImplType
+     */
+    public void setServiceImplType(String serviceImplType) {
+        internalAttributes.put(InternalAttribute.ATTR_SERVICE_IMPL_TYPE, serviceImplType);
     }
 
     /**

@@ -4,6 +4,7 @@ import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.model.DbType;
 import com.zzg.mybatis.generator.model.GeneratorConfig;
 import com.zzg.mybatis.generator.plugins.DbRemarksCommentGenerator;
+import com.zzg.mybatis.generator.plugins.JavaControllerGeneratorConfiguration;
 import com.zzg.mybatis.generator.plugins.JavaVOModelGeneratorConfiguration;
 import com.zzg.mybatis.generator.plugins.VoRemarksCommenctGenerator;
 import com.zzg.mybatis.generator.util.ConfigHelper;
@@ -120,10 +121,15 @@ public class MybatisGeneratorBridge {
         daoConfig.setTargetPackage(generatorConfig.getDaoPackage());
         daoConfig.setTargetProject(generatorConfig.getProjectFolder() + "/" + generatorConfig.getDaoTargetFolder());
         // Java VO Model
-        JavaVOModelGeneratorConfiguration javaVOModelConfig = new  JavaVOModelGeneratorConfiguration();
+        JavaVOModelGeneratorConfiguration javaVOModelConfig = new JavaVOModelGeneratorConfiguration();
         javaVOModelConfig.setConfigurationType("JAVA_VO_MODEL");
         javaVOModelConfig.setTargetPackage(generatorConfig.getVoModelPackage());
         javaVOModelConfig.setTargetProject(generatorConfig.getProjectFolder() + "/" + generatorConfig.getVoModelPackageTargetFolder());
+        // Java Controller
+        JavaControllerGeneratorConfiguration javaControllerConfig = new JavaControllerGeneratorConfiguration();
+        javaControllerConfig.setConfigurationType("JAVA_CONTROLLER");
+        javaControllerConfig.setTargetPackage(generatorConfig.getControllerPackage());
+        javaControllerConfig.setTargetProject(generatorConfig.getProjectFolder() + "/" + generatorConfig.getControllerPackageTargetFolder());
 
         JavaTypeResolverConfiguration javaTypeConfiguration = new JavaTypeResolverConfiguration();
         javaTypeConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.MyJavaTypeResolverImpl");
@@ -138,6 +144,7 @@ public class MybatisGeneratorBridge {
         context.setJavaTypeResolverConfiguration(javaTypeConfiguration);
         // 增加VO Model对象
         context.setJavaVOModelGeneratorConfiguration(javaVOModelConfig);
+        context.setJavaControllerGeneratorConfiguration(javaControllerConfig);
 
         // Comment
         CommentGeneratorConfiguration commentConfig = new CommentGeneratorConfiguration();

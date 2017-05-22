@@ -15,6 +15,7 @@
  */
 package org.mybatis.generator.codegen.mybatis3;
 
+import com.zzg.mybatis.generator.plugins.JavaControllerGenerator;
 import com.zzg.mybatis.generator.plugins.JavaVOModelGenerator;
 import org.mybatis.generator.api.GeneratedJavaFile;
 import org.mybatis.generator.api.GeneratedXmlFile;
@@ -126,10 +127,15 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
 
         initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
         clientGenerators.add(javaGenerator);
-        
+
+        // 增加Controller对象的生成逻辑
+//        AbstractJavaClientGenerator javaControllerGenerator = new JavaControllerGenerator(false);
+//        initializeAbstractGenerator(javaControllerGenerator, warnings, progressCallback);
+//        clientGenerators.add(javaControllerGenerator);
+
         return javaGenerator;
     }
-    
+
     /**
      * Creates the java client generator.
      *

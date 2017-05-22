@@ -29,6 +29,10 @@ public class GeneratorConfig {
 
 	private String voModelPackageTargetFolder;
 
+	private String controllerPackage;
+
+	private String controllerPackageTargetFolder;
+
 	private String daoPackage;
 
 	private String daoTargetFolder;
@@ -221,5 +225,21 @@ public class GeneratorConfig {
 
 	public void setVoModelPackageTargetFolder(String voModelPackageTargetFolder) {
 		this.voModelPackageTargetFolder = voModelPackageTargetFolder;
+	}
+
+	public String getControllerPackage() {
+		return controllerPackage;
+	}
+
+	public void setControllerPackage(String controllerPackage) {
+		this.controllerPackage = controllerPackage;
+	}
+
+	public String getControllerPackageTargetFolder() {
+		return controllerPackageTargetFolder;
+	}
+
+	public void setControllerPackageTargetFolder(String controllerPackageTargetFolder) {
+		this.controllerPackageTargetFolder = controllerPackageTargetFolder;
 	}
 }
