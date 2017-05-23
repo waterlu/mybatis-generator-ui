@@ -839,7 +839,7 @@ public abstract class IntrospectedTable {
         // 增加Result List VO对象
 
         // 增加Controller对象
-        calculateControllerAttributes();
+//        calculateControllerAttributes();
 
         // 增加Service对象
 
@@ -1535,20 +1535,20 @@ public abstract class IntrospectedTable {
 //        return sb.toString();
 //    }
 
-    /**
-     * Controller包名
-     *
-     * @return
-     */
-    protected String calculateJavaControllerPackage() {
-        JavaControllerGeneratorConfiguration config = context.getJavaControllerGeneratorConfiguration();
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(config.getTargetPackage());
-        sb.append(fullyQualifiedTable.getSubPackageForModel(isSubPackagesEnabled(config)));
-
-        return sb.toString();
-    }
+//    /**
+//     * Controller包名
+//     *
+//     * @return
+//     */
+//    protected String calculateJavaControllerPackage() {
+//        JavaControllerGeneratorConfiguration config = context.getJavaControllerGeneratorConfiguration();
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(config.getTargetPackage());
+//        sb.append(fullyQualifiedTable.getSubPackageForModel(isSubPackagesEnabled(config)));
+//
+//        return sb.toString();
+//    }
 
 //    /**
 //     * Service包名
@@ -1620,19 +1620,19 @@ public abstract class IntrospectedTable {
 //        this.setVoModalType(sb.toString());
 //    }
 
-    /**
-     * Controller对象
-     */
-    protected void calculateControllerAttributes() {
-        String packageName = calculateJavaControllerPackage();
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(packageName);
-        sb.append('.');
-        sb.append(fullyQualifiedTable.getDomainObjectName());
-        sb.append("Controller"); //$NON-NLS-1$
-        this.setVoModalType(sb.toString());
-    }
+//    /**
+//     * Controller对象
+//     */
+//    protected void calculateControllerAttributes() {
+//        String packageName = calculateJavaControllerPackage();
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(packageName);
+//        sb.append('.');
+//        sb.append(fullyQualifiedTable.getDomainObjectName());
+//        sb.append("Controller"); //$NON-NLS-1$
+//        this.setVoModalType(sb.toString());
+//    }
 
 //    /**
 //     * Service对象

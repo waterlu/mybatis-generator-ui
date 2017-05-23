@@ -84,7 +84,7 @@ public class Context extends PropertyHolder {
     /**
      * JAVA Controller对象配置信息
      */
-    private JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration;
+//    private JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration;
 
     /**
      * Java VO 对象的注释配置
@@ -203,13 +203,13 @@ public class Context extends PropertyHolder {
         this.javaVOModelGeneratorConfiguration = javaVOModelGeneratorConfiguration;
     }
 
-    public JavaControllerGeneratorConfiguration getJavaControllerGeneratorConfiguration() {
-        return javaControllerGeneratorConfiguration;
-    }
-
-    public void setJavaControllerGeneratorConfiguration(JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration) {
-        this.javaControllerGeneratorConfiguration = javaControllerGeneratorConfiguration;
-    }
+//    public JavaControllerGeneratorConfiguration getJavaControllerGeneratorConfiguration() {
+//        return javaControllerGeneratorConfiguration;
+//    }
+//
+//    public void setJavaControllerGeneratorConfiguration(JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration) {
+//        this.javaControllerGeneratorConfiguration = javaControllerGeneratorConfiguration;
+//    }
 
     /**
      * Adds the plugin configuration.
