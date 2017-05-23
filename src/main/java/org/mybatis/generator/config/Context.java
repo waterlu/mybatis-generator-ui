@@ -15,7 +15,6 @@
  */
 package org.mybatis.generator.config;
 
-import com.zzg.mybatis.generator.plugins.JavaControllerGeneratorConfiguration;
 import com.zzg.mybatis.generator.plugins.JavaVOModelGeneratorConfiguration;
 import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.xml.Attribute;
@@ -260,6 +259,7 @@ public class Context extends PropertyHolder {
         try {
             it = ObjectFactory.createIntrospectedTableForValidation(this);
         } catch (Exception e) {
+            e.printStackTrace();
             errors.add(getString("ValidationError.25", id)); //$NON-NLS-1$
         }
         

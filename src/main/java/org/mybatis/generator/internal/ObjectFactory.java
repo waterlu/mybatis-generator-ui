@@ -15,6 +15,7 @@
  */
 package org.mybatis.generator.internal;
 
+import cn.lu.mybatis.generator.codegen.IntrospectedTableJavaImpl;
 import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.DefaultJavaFormatter;
 import org.mybatis.generator.api.dom.DefaultXmlFormatter;
@@ -212,6 +213,7 @@ public class ObjectFactory {
 
             answer = clazz.newInstance();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(getString(
                     "RuntimeError.6", type), e); //$NON-NLS-1$
 
@@ -410,6 +412,9 @@ public class ObjectFactory {
             type = IntrospectedTableMyBatis3Impl.class.getName();
         } else if ("MyBatis3Simple".equalsIgnoreCase(type)) { //$NON-NLS-1$
             type = IntrospectedTableMyBatis3SimpleImpl.class.getName();
+        } else if ("Java".equalsIgnoreCase(type)) {
+            // 增加新的处理方式
+            type = IntrospectedTableJavaImpl.class.getName();
         }
 
         IntrospectedTable answer = (IntrospectedTable) createInternalObject(type);

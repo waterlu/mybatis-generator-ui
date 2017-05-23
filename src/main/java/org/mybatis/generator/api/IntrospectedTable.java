@@ -15,7 +15,6 @@
  */
 package org.mybatis.generator.api;
 
-import com.zzg.mybatis.generator.plugins.JavaControllerGeneratorConfiguration;
 import com.zzg.mybatis.generator.plugins.JavaVOModelGeneratorConfiguration;
 import org.mybatis.generator.config.*;
 import org.mybatis.generator.internal.rules.ConditionalModelRules;
@@ -46,7 +45,8 @@ public abstract class IntrospectedTable {
         /** The IBATI s2. */
         IBATIS2, 
         /** The MYBATI s3. */
-        MYBATIS3
+        MYBATIS3,
+        JAVA
     }
 
     /**

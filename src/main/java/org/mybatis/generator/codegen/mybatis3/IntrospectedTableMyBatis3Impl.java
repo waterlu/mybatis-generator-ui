@@ -15,7 +15,6 @@
  */
 package org.mybatis.generator.codegen.mybatis3;
 
-import com.zzg.mybatis.generator.plugins.JavaControllerGenerator;
 import com.zzg.mybatis.generator.plugins.JavaVOModelGenerator;
 import org.mybatis.generator.api.GeneratedJavaFile;
 import org.mybatis.generator.api.GeneratedXmlFile;

@@ -1,10 +1,10 @@
 package com.zzg.mybatis.generator.bridge;
 
+import cn.lu.mybatis.generator.codegen.ControllerCommentGenerator;
 import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.model.DbType;
 import com.zzg.mybatis.generator.model.GeneratorConfig;
 import com.zzg.mybatis.generator.plugins.DbRemarksCommentGenerator;
-import com.zzg.mybatis.generator.plugins.JavaControllerGeneratorConfiguration;
 import com.zzg.mybatis.generator.plugins.JavaVOModelGeneratorConfiguration;
 import com.zzg.mybatis.generator.plugins.VoRemarksCommenctGenerator;
 import com.zzg.mybatis.generator.util.ConfigHelper;
@@ -68,7 +68,7 @@ public class MybatisGeneratorBridge {
 		_LOG.info("connectorLibPath: {}", connectorLibPath);
         config.addClasspathEntry(connectorLibPath);
         Context context = new Context(ModelType.CONDITIONAL);
-        config.addContext(context);
+//        config.addContext(context);
         // Table config
         TableConfiguration tableConfig = new TableConfiguration(context);
         tableConfig.setTableName(generatorConfig.getTableName());
@@ -125,11 +125,6 @@ public class MybatisGeneratorBridge {
         javaVOModelConfig.setConfigurationType("JAVA_VO_MODEL");
         javaVOModelConfig.setTargetPackage(generatorConfig.getVoModelPackage());
         javaVOModelConfig.setTargetProject(generatorConfig.getProjectFolder() + "/" + generatorConfig.getVoModelPackageTargetFolder());
-//        // Java Controller
-//        JavaControllerGeneratorConfiguration javaControllerConfig = new JavaControllerGeneratorConfiguration();
-//        javaControllerConfig.setConfigurationType("JAVA_CONTROLLER");
-//        javaControllerConfig.setTargetPackage(generatorConfig.getControllerPackage());
-//        javaControllerConfig.setTargetProject(generatorConfig.getProjectFolder() + "/" + generatorConfig.getControllerPackageTargetFolder());
 
         JavaTypeResolverConfiguration javaTypeConfiguration = new JavaTypeResolverConfiguration();
         javaTypeConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.MyJavaTypeResolverImpl");
@@ -137,13 +132,12 @@ public class MybatisGeneratorBridge {
         context.setId("myid");
         context.addTableConfiguration(tableConfig);
         context.setJdbcConnectionConfiguration(jdbcConfig);
-        context.setJdbcConnectionConfiguration(jdbcConfig);
         context.setJavaModelGeneratorConfiguration(modelConfig);
+        // 增加VO Model对象
+        context.setJavaVOModelGeneratorConfiguration(javaVOModelConfig);
         context.setSqlMapGeneratorConfiguration(mapperConfig);
         context.setJavaClientGeneratorConfiguration(daoConfig);
         context.setJavaTypeResolverConfiguration(javaTypeConfiguration);
-        // 增加VO Model对象
-        context.setJavaVOModelGeneratorConfiguration(javaVOModelConfig);
 //        context.setJavaControllerGeneratorConfiguration(javaControllerConfig);
 
         // Comment
@@ -162,17 +156,17 @@ public class MybatisGeneratorBridge {
 
         // Java VO Model Comment
         CommentGeneratorConfiguration voCommentConfig = new CommentGeneratorConfiguration();
-        commentConfig.setConfigurationType(VoRemarksCommenctGenerator.class.getName());
+        voCommentConfig.setConfigurationType(VoRemarksCommenctGenerator.class.getName());
         if (generatorConfig.isComment()) {
-            commentConfig.addProperty("columnRemarks", "true");
+            voCommentConfig.addProperty("columnRemarks", "true");
         }
         if (generatorConfig.isAnnotation()) {
-            commentConfig.addProperty("annotations", "true");
+            voCommentConfig.addProperty("annotations", "true");
         }
         if (generatorConfig.isApiDoc()) {
-            commentConfig.addProperty("apiDoc", "true");
+            voCommentConfig.addProperty("apiDoc", "true");
         }
-        context.setCommentGeneratorConfiguration(commentConfig);
+        context.setCommentGeneratorConfiguration(voCommentConfig);
 
         
         //实体添加序列化
@@ -191,6 +185,42 @@ public class MybatisGeneratorBridge {
         context.setTargetRuntime("MyBatis3");
 
         context.addProperty("author", generatorConfig.getAuthor());
+
+
+        /**
+         * JAVA文件
+         */
+        Context context2 = new Context(ModelType.CONDITIONAL);
+
+        // Java Controller
+        JavaClientGeneratorConfiguration javaControllerConfig = new JavaClientGeneratorConfiguration();
+        javaControllerConfig.setConfigurationType("CONTROLLER");
+        javaControllerConfig.setTargetPackage(generatorConfig.getControllerPackage());
+        javaControllerConfig.setTargetProject(generatorConfig.getProjectFolder() + "/" + generatorConfig.getControllerPackageTargetFolder());
+
+        // Table config
+        TableConfiguration tableConfig2 = new TableConfiguration(context2);
+        tableConfig2.setTableName(generatorConfig.getTableName());
+        tableConfig2.setDomainObjectName(generatorConfig.getDomainObjectName());
+
+        // 注释
+        CommentGeneratorConfiguration commentConfig2 = new CommentGeneratorConfiguration();
+        commentConfig2.setConfigurationType(ControllerCommentGenerator.class.getName());
+
+        context2.setId("JavaController");
+        context2.addTableConfiguration(tableConfig2);
+        context2.setJdbcConnectionConfiguration(jdbcConfig);
+        context2.setJavaClientGeneratorConfiguration(daoConfig);
+        context2.setJavaModelGeneratorConfiguration(modelConfig);
+        context2.setJavaVOModelGeneratorConfiguration(javaVOModelConfig);
+        context2.setJavaTypeResolverConfiguration(javaTypeConfiguration);
+        context2.setJavaClientGeneratorConfiguration(javaControllerConfig);
+        context2.setCommentGeneratorConfiguration(commentConfig2);
+        context2.setTargetRuntime("Java");
+        context2.addProperty("author", generatorConfig.getAuthor());
+
+        config.addContext(context);
+        config.addContext(context2);
 
         List<String> warnings = new ArrayList<>();
         Set<String> fullyqualifiedTables = new HashSet<>();

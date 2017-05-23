@@ -29,9 +29,9 @@ public class GeneratorConfig {
 
 	private String voModelPackageTargetFolder;
 
-	private String controllerPackage;
+	private String controllerPackage = "cn.zjhf.kingold.demo.web";
 
-	private String controllerPackageTargetFolder;
+	private String controllerPackageTargetFolder = "src/main/java";
 
 	private String daoPackage;
 
